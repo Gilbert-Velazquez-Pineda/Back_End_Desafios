@@ -57,15 +57,16 @@ class ProductManagerFilesystem {
       const duplicateCode = products.some(e => e.code == newProduct.code)
       if(!duplicateCode) {
         products.push(newProduct);
+        //Escribir en el archivo FS convirtiendolo a objeto
+         await fs.promises.writeFile(this.path, JSON.stringify(products, null, 3));
+   
+         //regresar el nuevo producto a agregar
+         return newProduct;
+
       } else {
         console.log("El codigo",newProduct.code,"esta duplicado, ¡no se agregara a la lsita!")
      }
      
-     //Escribir en el archivo FS convirtiendolo a objeto
-      await fs.promises.writeFile(this.path, JSON.stringify(products, null, 3));
-
-      //regresar el nuevo producto a agregar
-      return newProduct;
 
       //promesa rechazada
     } catch (error) {
@@ -92,12 +93,34 @@ class ProductManagerFilesystem {
       console.log(error);
     }
   }
+
+  //delete product
+  async deleteProduct(deleteId) {
+    try {
+      const productFound = await this.getProducts();
+      const found = productFound.find(e => e.id == deleteId)
+      if (found) {
+         const productWithoutItem = productFound.filter(item => item.id !== deleteId)
+         console.log("se elimino producto con ID:", deleteId);
+         productFound.push(productWithoutItem);
+         await fs.promises.writeFile(this.path, JSON.stringify(productWithoutItem, null, 3));
+         return productFound
+      } else {
+        console.log("no se encuentra ningun producto con este ID");
+      }
+
+    } catch (error) {
+       console.log(error);
+    }
+  }
+
+
 }
 
 // Creamos una instancia
 // Y simplemente al hacer el new, se va a ejecutar el metodo init que creara el archivo si no existe
 const electronicProducts = new ProductManagerFilesystem(
-  "./electronic-products.json"
+  "./products.json"
 );
 
 // Metodos asincronos para ejecutar 
@@ -138,8 +161,12 @@ const testClass = async () => {
 
 
   //buscar producto por ID
-  const productById = await electronicProducts.getProductsById(1);  // buscar un producto desde su ID
+  const productById = await electronicProducts.getProductsById(10);  // buscar un producto desde su ID
   console.log(productById);
+
+  //borrar por ID
+  const deleteById = await electronicProducts.deleteProduct(1);
+  
   
 };
 

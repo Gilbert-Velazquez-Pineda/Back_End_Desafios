@@ -1,14 +1,5 @@
 [
    {
-      "title": "motherboard",
-      "description": "chipsets: AMD A32",
-      "price": 1450,
-      "thumbnail": "https://freepngimg.com/png/14180-motherboard-free-png-image",
-      "code": 1581,
-      "stock": 2,
-      "id": 1
-   },
-   {
       "title": "mouse gamer",
       "description": "Programable con 6 Botones",
       "price": 239,
@@ -25,5 +16,14 @@
       "code": 8147,
       "stock": 4,
       "id": 3
+   },
+   {
+      "title": "motherboard",
+      "description": "chipsets: AMD A32",
+      "price": 1450,
+      "thumbnail": "https://freepngimg.com/png/14180-motherboard-free-png-image",
+      "code": 1581,
+      "stock": 2,
+      "id": 4
    }
 ]
