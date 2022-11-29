@@ -1,5 +1,14 @@
 [
    {
+      "title": "motherboard",
+      "description": "chipsets: AMD A32",
+      "price": 1450,
+      "thumbnail": "https://freepngimg.com/png/14180-motherboard-free-png-image",
+      "code": 1581,
+      "stock": 200,
+      "id": 1
+   },
+   {
       "title": "mouse gamer",
       "description": "Programable con 6 Botones",
       "price": 239,
@@ -14,16 +23,7 @@
       "price": 1600,
       "thumbnail": "https://www.amazon.com.mx/HyperX-Alloy-Origins-Mechanical-Compatible/dp/B08XBQ79MN/ref=sr_1_9?keywords=keyboard&qid=1669066332&qu=eyJxc2MiOiI2Ljc5IiwicXNhIjoiNS45MSIsInFzcCI6IjQuNTcifQ%3D%3D&s=electronics&sprefix=keyb%2Celectronics%2C115&sr=1-9",
       "code": 8147,
-      "stock": 4,
+      "stock": 40,
       "id": 3
-   },
-   {
-      "title": "motherboard",
-      "description": "chipsets: AMD A32",
-      "price": 1450,
-      "thumbnail": "https://freepngimg.com/png/14180-motherboard-free-png-image",
-      "code": 1581,
-      "stock": 2,
-      "id": 4
    }
 ]

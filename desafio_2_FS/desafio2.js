@@ -40,12 +40,11 @@ class ProductManagerFilesystem {
 
   async saveProduct({ title, description, price, thumbnail, code, stock }) {
     try {
-      // Validamos producto (aunque esto ya es más del desafio anterior)
       if (!title || !description || !price || !thumbnail || !code || !stock)
         return { error: "Las variables son obligatorias" };
 
       const newProduct = { title, description, price, thumbnail, code, stock };
-      // vamos a buscar el array de products, para no hacer el readfile aca podemos reutilizar el metodo getProducts
+      // vamos a buscar el array de products
       const products = await this.getProducts();
       
       //agregar ID verificando que no se repita
@@ -106,11 +105,31 @@ class ProductManagerFilesystem {
          await fs.promises.writeFile(this.path, JSON.stringify(productWithoutItem, null, 3));
          return productFound
       } else {
-        console.log("no se encuentra ningun producto con este ID");
+        console.log("Ningun producto con este ID, No se puede borrar nada");
       }
 
     } catch (error) {
        console.log(error);
+    }
+  }
+
+  //update product
+  async updateProduct (updateId, { title, description, price, thumbnail, code, stock }) {
+    try {
+      const productToUpdate = await this.getProducts(); //obtengo toda la matriz
+      const found = productToUpdate.find(e => e.id == updateId) // encuentro el array por el ID
+      const productUpdate = { title, description, price, thumbnail, code, stock } //cargo los datos de producto a actualizar
+      if (found) {  //si encuentra el ID del procucto entra
+        console.log("El producto a actualizar  es:",found.title) // muestra el nombre del producto a actualizar
+        const newArr = found.map((element, productUpdate) => {
+          return element + productUpdate;
+        })
+        console.log(newArr)
+        await fs.promises.writeFile(this.path, JSON.stringify(newArr, null, 3)) // escribe en el documento json la actualizacion
+      }      
+
+    } catch (error) { // si no encuentra el ID del procucto 
+      console.log("ningun producto tiene esa Id; No se puede actualizar");
     }
   }
 
@@ -127,13 +146,13 @@ const electronicProducts = new ProductManagerFilesystem(
 const testClass = async () => {
 
   // añadir producto
-     const productOne = await electronicProducts.saveProduct({
+  /*    const productOne = await electronicProducts.saveProduct({
       code: 1581,
       title: "motherboard",
       description: "chipsets: AMD A32",
       price: 1450,
       thumbnail: "https://freepngimg.com/png/14180-motherboard-free-png-image",
-      stock: 2
+      stock: 200
      });
 
      const productTwo = await electronicProducts.saveProduct ({
@@ -151,22 +170,31 @@ const testClass = async () => {
       description: "Mechanical Gaming Keyboard",
       price: 1600,
       thumbnail: "https://www.amazon.com.mx/HyperX-Alloy-Origins-Mechanical-Compatible/dp/B08XBQ79MN/ref=sr_1_9?keywords=keyboard&qid=1669066332&qu=eyJxc2MiOiI2Ljc5IiwicXNhIjoiNS45MSIsInFzcCI6IjQuNTcifQ%3D%3D&s=electronics&sprefix=keyb%2Celectronics%2C115&sr=1-9",
-      stock: 4
-     });
+      stock: 40
+     }); */
 
 
   // Todos los productos
   const allProducts = await electronicProducts.getProducts();
-  console.log("Lista de productos", allProducts);
-
+  /* console.log("Lista de productos", allProducts);
+ */
 
   //buscar producto por ID
-  const productById = await electronicProducts.getProductsById(10);  // buscar un producto desde su ID
+  const productById = await electronicProducts.getProductsById(10); 
   console.log(productById);
 
   //borrar por ID
-  const deleteById = await electronicProducts.deleteProduct(1);
-  
+  const deleteById = await electronicProducts.deleteProduct(10);
+
+  //update product
+  const updateById = await electronicProducts.updateProduct(1, {
+    title: "test",
+    description: "test update",
+    price: 10000,
+    thumbnail: "test image",
+    code: 11111,
+    stock: 200
+  });
   
 };
 
