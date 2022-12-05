@@ -1,0 +1,41 @@
+[
+    {
+        "id": 1,
+        "title": "hola"
+     },
+     {
+        "id": 2,
+        "title": "hola"
+     },
+     {
+        "id": 3,
+        "title": "hola"
+     },
+     {
+        "id": 6,
+        "title": "hola"
+     },
+     {
+        "id": 7,
+        "title": "hola"
+     },
+     {
+        "id": 8,
+        "title": "hola"
+     },
+     {
+        "id": 9,
+        "title": "hola"
+     },
+     {
+        "id": 10,
+        "title": "hola"
+     },
+     {
+        "title": "Primer Producto MODIFICADO",
+        "description": "primer producto guardado",
+        "price": 300,
+        "code": "CLS124",
+        "id": 11
+     }
+]
