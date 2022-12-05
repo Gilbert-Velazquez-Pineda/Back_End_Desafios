@@ -114,19 +114,18 @@ class ProductManagerFilesystem {
   }
 
   //update product
-  async updateProduct (updateId, { title, description, price, thumbnail, code, stock }) {
+  async updateProduct (updateId, updateObj) {
     try {
-      const productToUpdate = await this.getProducts(); //obtengo toda la matriz
-      const found = productToUpdate.find(e => e.id == updateId) // encuentro el array por el ID
-      const productUpdate = { title, description, price, thumbnail, code, stock } //cargo los datos de producto a actualizar
-      if (found) {  //si encuentra el ID del procucto entra
-        console.log("El producto a actualizar  es:",found.title) // muestra el nombre del producto a actualizar
-        const newArr = found.map((element, productUpdate) => {
-          return element + productUpdate;
-        })
-        console.log(newArr)
-        await fs.promises.writeFile(this.path, JSON.stringify(newArr, null, 3)) // escribe en el documento json la actualizacion
-      }      
+      updateObj.id = updateId
+      const list = await this.getProducts() //obtengo toda la matriz
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].id == updateId) {
+           list[i] = updateObj
+           break
+        }  
+      }
+      await fs.promises.writeFile(this.path, JSON.stringify(list, null, 3)) // escribe en el documento json la actualizacion
+        
 
     } catch (error) { // si no encuentra el ID del procucto 
       console.log("ningun producto tiene esa Id; No se puede actualizar");
@@ -171,30 +170,30 @@ const testClass = async () => {
       price: 1600,
       thumbnail: "https://www.amazon.com.mx/HyperX-Alloy-Origins-Mechanical-Compatible/dp/B08XBQ79MN/ref=sr_1_9?keywords=keyboard&qid=1669066332&qu=eyJxc2MiOiI2Ljc5IiwicXNhIjoiNS45MSIsInFzcCI6IjQuNTcifQ%3D%3D&s=electronics&sprefix=keyb%2Celectronics%2C115&sr=1-9",
       stock: 40
-     }); */
-
+     });
+ */
 
   // Todos los productos
   const allProducts = await electronicProducts.getProducts();
-  /* console.log("Lista de productos", allProducts);
- */
+  console.log("Lista de productos", allProducts);
+
 
   //buscar producto por ID
   const productById = await electronicProducts.getProductsById(10); 
   console.log(productById);
 
   //borrar por ID
-  const deleteById = await electronicProducts.deleteProduct(10);
+  const deleteById = await electronicProducts.deleteProduct(200);
 
   //update product
-  const updateById = await electronicProducts.updateProduct(1, {
+  const updateById = await electronicProducts.updateProduct(200, {
     title: "test",
     description: "test update",
     price: 10000,
     thumbnail: "test image",
     code: 11111,
     stock: 200
-  });
+  })
   
 };
 

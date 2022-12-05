@@ -1,23 +1,5 @@
 [
    {
-      "title": "motherboard",
-      "description": "chipsets: AMD A32",
-      "price": 1450,
-      "thumbnail": "https://freepngimg.com/png/14180-motherboard-free-png-image",
-      "code": 1581,
-      "stock": 200,
-      "id": 1
-   },
-   {
-      "title": "mouse gamer",
-      "description": "Programable con 6 Botones",
-      "price": 239,
-      "thumbnail": "https://www.amazon.com.mx/Free-Programable-Retroiluminación-Interruptor-Independiente/dp/B098SCLJDJ",
-      "code": 2054,
-      "stock": 10,
-      "id": 2
-   },
-   {
       "title": "Keyboard",
       "description": "Mechanical Gaming Keyboard",
       "price": 1600,
